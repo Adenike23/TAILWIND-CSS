@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="/css/main.css">
-    <title>Manage Landing Page</title>
+    <title>URL-shorteningAPI</title>
 </head>
 <body>
     <nav class="container relative mx-auto p-6">
@@ -51,22 +51,23 @@
     </main>
 
     <section class="container relative w-5/6 rounded-md mx-auto bg-darkViolet p-10 flex flex-col justify-center md:block md:ps-24 addLink">
-            <div>
-                <input class="p-3 rounded-md md:w-4/6 me-5" type="text" placeholder="Shorten a link here...">
-                <button class="bg-Cyan mt-3 rounded-md py-3 md:w-1/6 text-white text-lg shorten hover:font-bold">Shorten it!</button>
+            <div class="flex items-center flex-col gap-3 md:flex-row md:space-x-8">
+                <input class="p-3 rounded-md w-5/6 md:w-4/6" type="text" placeholder="Shorten a link here...">
+                <button class="bg-Cyan rounded-md py-3 w-5/6 md:w-1/6 text-white text-lg shorten hover:font-bold">Shorten it!</button>
             </div>
                 <p class="text-center mt-3 hidden loading"><i class="fa-solid fa-gear fa-beat text-2xl text-Cyan"></i></p>
                 <small class="text-rose-400 error"></small>
     </section>
-
-    <section class="hidden mt-5 max-w-7xl mx-auto URL_section">
-        <div class="flex justify-between items-center border-solid bg-slate-100 p-3">
+    
+    <section class="hidden mt-5 w-5/6 mx-auto URL_section">
+        <!-- <div class="flex flex-col justify-between items-center border-solid bg-slate-100 p-3 md:flex-row">
             <p class="inputLink"></p>
             <div class="space-x-2">
                 <a href="" target="_blank" class="text-Cyan result"></a>
                 <button class="bg-Cyan rounded-md px-4 py-2 text-white text-sm copy">Copy</button>
             </div>
-        </div>
+        </div> --> 
+        <!-- incorporated in JS line 40 - 47 using innerHTML -->
     </section>
 
     <section class="bg-stone-100 my-7 py-7">

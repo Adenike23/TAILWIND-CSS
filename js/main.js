@@ -6,6 +6,8 @@ const aTag = document.querySelector('.result');
 const loading = document.querySelector('.loading')
 const URLSection = document.querySelector('.URL_section');
 const copy = document.querySelector('.copy');
+// let linkArray = JSON.parse(localStorage.getItem('links'))  ||  [] 
+
 
 // function to set a timer for the error message
 function timeOut(){
@@ -34,27 +36,45 @@ async function getShortLink() {
         setTimeout(timeOut, 3000)
     }
     let data = await response.json();
-    input_link.textContent = `${input.value}`
-    aTag.href = data.result.full_short_link;
-    aTag.textContent = data.result.short_link;
+    URLSection.innerHTML+= `
+        <div class="flex flex-col justify-between items-center border-solid bg-slate-100 p-3 md:flex-row">
+            <p class="inputLink">${input.value}</p>
+            <div class="space-x-2">
+                <a href="${data.result.full_short_link}" target="_blank" class="text-Cyan result">${data.result.short_link}</a>
+                <button class="bg-Cyan rounded-md px-4 py-2 text-white text-sm copy">Copy</button>
+            </div>
+        </div>
+    `
     input.value = ""
-    copy.addEventListener('click', function() {
-        navigator.clipboard.writeText(data.result.full_short_link)
+    
+    // event delegation is used for the copy button. e=event parameter
+    URLSection.addEventListener('click', function(e){
+        if (e.target.classList.contains('copy')){
+            navigator.clipboard.writeText(data.result.full_short_link)
+            let copy = e.target
+            copy.style.backgroundColor = '#282745';
+            copy.textContent = 'Copied!'
+            setTimeout(() => {
+            copy.style.backgroundColor = '#3AC6BE';
+            copy.textContent = 'Copy'
+        }, 3000);
+        }
     })
 }
 button.addEventListener('click', function() {
     if(input.value === '') {
+        error.style.display = 'block'
         error.textContent = 'Please add a link'
-        setTimeout(timeOut, 3000)
+        setTimeout(() => {
+            error.style.display = 'none'
+        }, 3000);
+        return
     } else{
         getShortLink();
     }
 })
-copy.addEventListener('click', function(){
-    copy.style.backgroundColor = '#282745';
-    copy.textContent = 'Copied!'
-})
-
-document.querySelector('.addLink').style.backgroundImage = 'url(/images/bg-shorten-desktop.svg)'
+const linkImage = document.querySelector('.addLink')
+linkImage.style.backgroundImage = 'url(/images/bg-shorten-desktop.svg)'
+linkImage.style.backgroundPosition = 'center';
+linkImage.style.backgroundSize = 'cover'
 document.querySelector('.support').style.backgroundImage = 'url(/images/bg-boost-desktop.svg)';
-
