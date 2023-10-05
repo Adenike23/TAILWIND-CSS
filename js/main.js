@@ -6,9 +6,20 @@ const aTag = document.querySelector('.result');
 const loading = document.querySelector('.loading')
 const URLSection = document.querySelector('.URL_section');
 const copy = document.querySelector('.copy');
-// let linkArray = JSON.parse(localStorage.getItem('links'))  ||  [] 
+let urlArray = JSON.parse(localStorage.getItem('linkUrl'))  ||  [] 
+const menu = document.querySelector('.menu')
+const openMenu = document.querySelector('.open-menu')
+const closeMenu = document.querySelector('.close-menu')
 
 
+document.querySelectorAll('.ul a').forEach((navLink) => {
+    navLink.addEventListener('click', function(){
+        openMenu.style.display = 'block'
+        closeMenu.style.display = 'none'
+        menu.classList.toggle('flex')
+        menu.classList.toggle('hidden')
+    })
+})
 // function to set a timer for the error message
 function timeOut(){
     error.style.display = 'none'
@@ -29,7 +40,6 @@ async function getShortLink() {
     }
     // if the response status is okay, display the URL section
     if(response.ok) URLSection.style.display = 'block';
-
     // if not okay, display the error message. The function, timeout is also called here
     if(!response.ok){
         error.textContent = 'Please put in a valid link';
@@ -73,8 +83,25 @@ button.addEventListener('click', function() {
         getShortLink();
     }
 })
+
 const linkImage = document.querySelector('.addLink')
 linkImage.style.backgroundImage = 'url(/images/bg-shorten-desktop.svg)'
 linkImage.style.backgroundPosition = 'center';
 linkImage.style.backgroundSize = 'cover'
 document.querySelector('.support').style.backgroundImage = 'url(/images/bg-boost-desktop.svg)';
+
+
+openMenu.addEventListener('click', function(){
+    openMenu.style.display = 'none'
+    closeMenu.style.display = 'block'
+    // closeMenu.style.display = 'block'
+    menu.classList.toggle('flex')
+    menu.classList.toggle('hidden')
+})
+closeMenu.addEventListener('click', function(){
+    openMenu.style.display = 'block'
+    closeMenu.style.display = 'none'
+    // menu.style.display = 'none'
+    menu.classList.toggle('flex')
+    menu.classList.toggle('hidden')
+})
